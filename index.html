@@ -37,15 +37,16 @@
         const messages = document.getElementById('messages');
         const btnJoin = document.getElementById('btnJoin')
         const btnLeave = document.getElementById('btnLeave')
+        const title = document.getElementById('rooms')
 
         btnJoin.addEventListener('click', () => {
             const roomName = 'Salle 1';
-            socket.emit('honorine', roomName);
+            socket.emit('rooms', {rooms : roomName, action: 'join'});
         })
 
         btnLeave.addEventListener('click', () => {
             const roomName = 'Salle 1';
-            socket.emit('leave room', roomName);
+            socket.emit('rooms', {rooms : roomName, action: 'leave'});
         })
 
         form.addEventListener('submit', (e) => {
@@ -55,6 +56,14 @@
                 input.value = '';
             }
         });
+
+        socket.on('changeTitleRooms', (rooms) => {
+            if(rooms !== null){
+                title.innerHTML = "Vous êtes dans la " + rooms
+            }else{
+                title.innerHTML = "Vous n'êtes dans aucune salle"
+            }
+        })
 
         socket.on('chat message', (msg) => {
             const item = document.createElement('li');

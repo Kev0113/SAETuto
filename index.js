@@ -16,15 +16,19 @@ server.listen(3000, () => {
 });
 
 io.on('connection', (socket) => {
-    socket.on('honorine', (roomName) => {
-        socket.join(roomName);
-        console.log(`Un utilisateur a rejoint la salle: ${roomName}`);
-    });
-
-    socket.on('leave room', (roomName) => {
-        socket.leave(roomName);
-        console.log(`Un utilisateur a quitter la salle: ${roomName}`);
-    });
+    socket.on('rooms', (data) => {
+        if(data.action === "join"){
+            socket.join(data.rooms)
+        }
+        if(data.action === "leave"){
+            socket.leave(data.rooms)
+        }
+        let tab = []
+        socket.rooms.forEach(function(element){
+            tab.push(element)
+        })
+        socket.emit('changeTitleRooms', tab[1])
+    })
 
     socket.on('chat message', (msg) => {
         io.to('Salle 1').emit('chat message', msg);
