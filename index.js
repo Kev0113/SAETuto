@@ -12,25 +12,22 @@ app.get('/', (req, res) => {
 });
 
 server.listen(3000, () => {
-    console.log('server running at http://localhost:3000');
+    console.log('http://localhost:3000');
 });
 
 io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
+    socket.on('honorine', (roomName) => {
+        socket.join(roomName);
+        console.log(`Un utilisateur a rejoint la salle: ${roomName}`);
     });
-});
 
-// this will emit the event to all connected sockets
-io.emit('hello', 'world');
+    socket.on('leave room', (roomName) => {
+        socket.leave(roomName);
+        console.log(`Un utilisateur a quitter la salle: ${roomName}`);
+    });
 
-io.on('connection', (socket) => {
-    socket.broadcast.emit('hi');
-});
-
-io.on('connection', (socket) => {
     socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
+        io.to('Salle 1').emit('chat message', msg);
     });
 });
 
