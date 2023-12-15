@@ -5,8 +5,10 @@ const { Server } = require('socket.io');
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
-
+const io = new Server(server, {
+    connectionStateRecovery: {}
+  });
+  
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'index.html'));
 });
@@ -34,3 +36,11 @@ io.on('connection', (socket) => {
         io.to('Salle 1').emit('chat message', msg);
     });
 });
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
+    });
+  });
+  
