@@ -11,29 +11,26 @@ app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'index.html'));
 });
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
-});
-
 server.listen(3000, () => {
-    console.log('server running at http://localhost:3000');
+    console.log('http://localhost:3000');
 });
 
 io.on('connection', (socket) => {
+    socket.on('rooms', (data) => {
+        if(data.action === "join"){
+            socket.join(data.rooms)
+        }
+        if(data.action === "leave"){
+            socket.leave(data.rooms)
+        }
+        let tab = []
+        socket.rooms.forEach(function(element){
+            tab.push(element)
+        })
+        socket.emit('changeTitleRooms', tab[1])
+    })
+
     socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
-    });
-});
-
-// this will emit the event to all connected sockets
-io.emit('hello', 'world');
-
-io.on('connection', (socket) => {
-    socket.broadcast.emit('hi');
-});
-
-io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
+        io.to('Salle 1').emit('chat message', msg);
     });
 });

@@ -17,6 +17,11 @@
     </style>
 </head>
 <body>
+    <button id="btnJoin">Join salle 1</button>
+    <button id="btnLeave">Leave salle 1</button>
+
+    <h1 style="text-align: center; margin: 0" id="rooms">Vous êtes dans aucune salle</h1>
+
     <ul id="messages"></ul>
     <form id="form" action="">
         <input id="input" autocomplete="off" /><button>Send</button>
@@ -30,6 +35,19 @@
         const form = document.getElementById('form');
         const input = document.getElementById('input');
         const messages = document.getElementById('messages');
+        const btnJoin = document.getElementById('btnJoin')
+        const btnLeave = document.getElementById('btnLeave')
+        const title = document.getElementById('rooms')
+
+        btnJoin.addEventListener('click', () => {
+            const roomName = 'Salle 1';
+            socket.emit('rooms', {rooms : roomName, action: 'join'});
+        })
+
+        btnLeave.addEventListener('click', () => {
+            const roomName = 'Salle 1';
+            socket.emit('rooms', {rooms : roomName, action: 'leave'});
+        })
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -38,6 +56,14 @@
                 input.value = '';
             }
         });
+
+        socket.on('changeTitleRooms', (rooms) => {
+            if(rooms !== null){
+                title.innerHTML = "Vous êtes dans la " + rooms
+            }else{
+                title.innerHTML = "Vous n'êtes dans aucune salle"
+            }
+        })
 
         socket.on('chat message', (msg) => {
             const item = document.createElement('li');
