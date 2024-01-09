@@ -9,6 +9,10 @@ const io = new Server(server, {
     connectionStateRecovery: {}
   });
 
+let name = ""
+
+app.use(express.static(join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'index.html'));
 });
@@ -18,6 +22,7 @@ server.listen(3000, () => {
 });
 
 io.on('connection', (socket) => {
+    console.log(socket.rooms)
     socket.on('rooms', (data) => {
         if(data.action === "join"){
             socket.join(data.rooms)
@@ -34,6 +39,7 @@ io.on('connection', (socket) => {
 
     socket.on('chat message', (msg) => {
         io.to('Salle 1').emit('chat message', msg);
+        // socket.to('4r-qY9Nycmjy0T2YAAAH').emit("chat message", socket.id, msg);
     });
 });
 
@@ -42,4 +48,4 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
       console.log('user disconnected');
     });
-  });
+});
