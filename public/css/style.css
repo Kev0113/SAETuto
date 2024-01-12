@@ -1,0 +1,31 @@
+/*body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }*/
+
+/*#form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }*/
+/*#input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }*/
+/*#input:focus { outline: none; }*/
+/*#form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }*/
+
+/*#messages { list-style-type: none; margin: 0; padding: 0; }*/
+/*#messages > li { padding: 0.5rem 1rem; }*/
+/*#messages > li:nth-child(odd) { background: #efefef;}*/
+
+body{
+    overflow: hidden;
+}
+
+/*.hide{ visibility: hidden; }*/
+
+.cta,.input{-webkit-appearance:none}#form,.input,.room{box-sizing:border-box}.cta,.room{cursor:pointer}#bases-child,#form,.flex,.room{display:flex}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}#form{background:rgba(0,0,0,.15);padding:.25rem;bottom:0;right:0;height:3rem;backdrop-filter:blur(10px);position:absolute;width:70%}#form>button,#input{padding:0 1rem;margin:.25rem}#input{border:none;flex-grow:1;border-radius:2rem}#input: focus{outline:0}#form>button{background:#333;border:none;border-radius:3px;outline:0;color:#fff}#messages{list-style-type:none;margin:0;padding:0;max-height:80vh;overflow-y: scroll}#messages>li{padding:.5rem 1rem}#messages>li:nth-child(odd){background:#efefef}.hide{visibility:hidden}.cta{background-color:#131111;color:#fff;font-weight:lighter;padding:10px 25px;border-radius:3px;border:none}.input{border-radius:3px;border:1px solid #dadada;outline:0;align-self:stretch;width:250px;padding:0 15px}#bases-child{align-items:center;gap:10px;margin-top:25px}.title{font-size:3rem;font-weight:700;color:#131111}.container{max-width:1300px;margin:auto}.side-menu{flex-basis:30%;border-right:1px solid #dadada;height:100vh}.room{width:100%;background-color:#f4f4f4;padding:15px 10px;justify-content:space-between;align-items:center}
+
+#login-box{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    z-index: 99;
+}

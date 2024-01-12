@@ -1,40 +1,63 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Socket.IO chat</title>
-    <link rel="stylesheet" type="text/css" href="public/styles/style.css" />
+
+    <link rel="stylesheet" href="./public/css/style.css">
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js" defer></script>
+    <script src="./public/js/socketScript.js" defer></script>
 </head>
-
-
-<script src="public/scripts/test.js"></script>
-
 <body>
 
-    <div id="bases">
-        <input id="name" type="text" name="name">
-        <button id="confirmName">Ok</button>
-    </div>
-
-    <div id="hiddenIfNotLogin" style="display: none">
-        <button id="btnJoin">Join salle 1</button>
-        <button id="btnLeave">Leave salle 1</button>
-
-        <h1 style="text-align: center; margin: 0" id="rooms">Vous êtes dans aucune salle</h1>
-
-        <ul id="messages" class="hide"></ul>
-        <form id="form" action="">
-            <input id="input" autocomplete="off" /><button>Send</button>
-        </form>
-
-        <div id="connected" style="position: absolute; top: 0; right: 8px; margin: 0">
-            <p></p>
+    <section id="login-box">
+        <div class="container">
+            <div id="bases-child">
+                <input id="login" type="text" name="name" class="input" placeholder="Nom">
+                <button id="confirm_login" class="cta">Ok</button>
+            </div>
         </div>
+    </section>`
+    <section id="chat-box">
+        <div class="flex">
+            <div class="side-menu">
+                <div class="room">
+                    <h2>Salle 1</h2>
+                    <button id="btnSalle1" data-action="join" data-rooms="Salle 1" class="cta">Rejoindre la salle 1</button>
+<!--                    <button id="btnJoin" class="cta">Rejoindre la salle 1</button>-->
+<!--                    <button id="btnLeave" class="cta">Quitter la salle</button>-->
+                </div>
+            </div>
+            <div style="margin: 25px; flex-basis: 70%">
+                <h1 style="text-align: center; margin: 0" id="title">Vous êtes dans aucune salle</h1>
+                <ul id="messages" class="hide"></ul>
+                <form id="form" action="">
+                    <input id="input" autocomplete="off" /><button>Send</button>
+                </form>
 
-    </div>
+                <div id="connected" style="position: absolute; top: 0; right: 8px; margin: 0">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<!--    <div id="login-box">-->
+<!--        <input id="login" type="text">-->
+<!--        <button id="confirm_login">OK</button>-->
+<!--    </div>-->
+
+<!--    <div id="chat-box" style="display: none">-->
+<!--        <h1 id="title" style="text-align: center">Vous n'êtes dans aucune salle</h1>-->
+
+<!--        <button id="btnSalle1" data-action="join" data-rooms="Salle 1">Rejoindre la salle 1</button>-->
+
+<!--        <ul id="messages"></ul>-->
+<!--        <form id="form" action="">-->
+<!--            <input id="input" autocomplete="off" />-->
+<!--            <button>Send</button>-->
+<!--        </form>-->
+<!--    </div>-->
 </body>
-
 </html>
